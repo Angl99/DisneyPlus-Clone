@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function Login(props) {
+export default function Login() {
     return (
         <Container>
             <Content>
