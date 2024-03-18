@@ -48,8 +48,6 @@ const Header = (props) => {
           <Login onClick={handleAuth}>Login</Login>
         ) : (
           <>
-          </>
-        )}
             <NavMenu>
               <a href="/home">
                 <img src="src\assets\images\home-icon.svg" alt="HOME" />
@@ -82,7 +80,9 @@ const Header = (props) => {
                 <span>SERIES</span>
               </a>
             </NavMenu>
-      <Login onClick={handleAuth}>Login</Login>
+            <UserImg src={userPhoto} alt={userName} />
+      </>
+      )}
     </Nav>
   );
 };
@@ -193,6 +193,12 @@ const Login = styled.a`
     color: #000;
     border-color: transparent;
   }
+`;
+
+
+const UserImg = styled.img`
+  height: 100%;
+  border-radius: 50%;
 `;
 
 export default Header;
