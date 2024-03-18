@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { auth, provider } from "../back-end/firebase";
 import { signInWithPopup } from "firebase/auth";
-// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// Dispatch allows dispatching actions to the store
+// Selector allows retreiving things from the store
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserName,
@@ -10,14 +12,29 @@ import {
 } from "../features/user/userSlice";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
+
   const handleAuth = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result);
+        setUser(result.user);
       })
       .catch((error) => {
         alert(error.message);
       });
+  };
+
+  const setUser = (user) => {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    );
   };
 
   return (
@@ -25,32 +42,46 @@ const Header = (props) => {
       <Logo>
         <img src="src\assets\images\logo.svg" alt="Disney+" />
       </Logo>
-      <NavMenu>
-        <a href="/home">
-          <img src="src\assets\images\home-icon.svg" alt="HOME" />
-          <span>HOME</span>
-        </a>
-        <a>
-          <img src="src\assets\images\search-icon.svg" alt="SEARCH" />
-          <span>SEARCH</span>
-        </a>
-        <a>
-          <img src="src\assets\images\watchlist-icon.svg" alt="WATCHLIST" />
-          <span>WATCHLIST</span>
-        </a>
-        <a>
-          <img src="src\assets\images\original-icon.svg" alt="ORIGINALS" />
-          <span>ORIGINALS</span>
-        </a>
-        <a>
-          <img src="src\assets\images\movie-icon.svg" alt="MOVIES" />
-          <span>MOVIES</span>
-        </a>
-        <a>
-          <img src="src\assets\images\series-icon.svg" alt="SERIES" />
-          <span>SERIES</span>
-        </a>
-      </NavMenu>
+      {
+        // If the user is not logged in, then show the login button
+        !userName ? (
+          <Login onClick={handleAuth}>Login</Login>
+        ) : (
+          <>
+          </>
+        )}
+            <NavMenu>
+              <a href="/home">
+                <img src="src\assets\images\home-icon.svg" alt="HOME" />
+                <span>HOME</span>
+              </a>
+              <a>
+                <img src="src\assets\images\search-icon.svg" alt="SEARCH" />
+                <span>SEARCH</span>
+              </a>
+              <a>
+                <img
+                  src="src\assets\images\watchlist-icon.svg"
+                  alt="WATCHLIST"
+                />
+                <span>WATCHLIST</span>
+              </a>
+              <a>
+                <img
+                  src="src\assets\images\original-icon.svg"
+                  alt="ORIGINALS"
+                />
+                <span>ORIGINALS</span>
+              </a>
+              <a>
+                <img src="src\assets\images\movie-icon.svg" alt="MOVIES" />
+                <span>MOVIES</span>
+              </a>
+              <a>
+                <img src="src\assets\images\series-icon.svg" alt="SERIES" />
+                <span>SERIES</span>
+              </a>
+            </NavMenu>
       <Login onClick={handleAuth}>Login</Login>
     </Nav>
   );
