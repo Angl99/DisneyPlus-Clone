@@ -2,7 +2,7 @@
 
 ## Description 📝
 
-This project is a Disney Plus clone developed for educational purposes, aimed at understanding and practicing various modern web development technologies. It utilizes a stack of modern technologies including Vite.js, React, JavaScript, Redux, Firebase, and React Styled Components to recreate the functionality and user interface of Disney Plus for educational exploration and learning.
+This project is a Disney Plus clone developed for educational purposes, aimed at understanding and practicing various modern web development technologies and techniques used by big companies. It utilizes a stack of modern technologies including Vite.js, React, JavaScript, Redux, Firebase, and React Styled Components.
 
 ## Technologies 💻
 - **Vite.js**: A fast, modern build tool for web development. It focuses on providing a lightning-fast development experience while also delivering optimized production builds.
